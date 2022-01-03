@@ -166,7 +166,9 @@ async function main({ sendToQueue }) {
     await checkConditions()
 
     const fromBlock = lastProcessedBlock + 1
-    const rangeEndBlock = config.blockPollingLimit ? fromBlock + config.blockPollingLimit : lastBlockToProcess
+    // TODO: config.blockPollingLimit is undefined, to fix later
+    // const rangeEndBlock = config.blockPollingLimit ? fromBlock + config.blockPollingLimit : lastBlockToProcess
+    const rangeEndBlock = fromBlock + 1000 // 1000 is the pollingLimit
     let toBlock = Math.min(lastBlockToProcess, rangeEndBlock)
 
     const events = (await getEvents({
